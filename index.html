@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой сайт с Supabase</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Мой сайт на Supabase</h1>
+            <nav>
+                <button id="homeBtn" class="nav-btn active">Главная</button>
+                <button id="profileBtn" class="nav-btn">Профиль</button>
+                <button id="dataBtn" class="nav-btn">Данные</button>
+                <button id="authBtn" class="nav-btn auth-status">Войти</button>
+            </nav>
+        </header>
+
+        <main id="content">
+            <!-- Контент будет загружаться динамически -->
+        </main>
+    </div>
+
+    <!-- Шаблоны -->
+    <template id="home-template">
+        <div class="home-section">
+            <h2>Добро пожаловать!</h2>
+            <p>Это демонстрационный сайт с интеграцией Supabase.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🔐 Аутентификация</h3>
+                    <p>Регистрация и вход пользователей</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💾 База данных</h3>
+                    <p>PostgreSQL через Supabase</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Реальное время</h3>
+                    <p>Мгновенные обновления данных</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="profile-template">
+        <div class="profile-section">
+            <h2>Профиль пользователя</h2>
+            <div id="profile-info">
+                <p>Загрузка...</p>
+            </div>
+            
+            <form id="profile-form" style="display: none;">
+                <div class="form-group">
+                    <label>Имя:</label>
+                    <input type="text" id="fullName" placeholder="Ваше имя">
+                </div>
+                <div class="form-group">
+                    <label>Телефон:</label>
+                    <input type="tel" id="phone" placeholder="+7 (999) 123-45-67">
+                </div>
+                <div class="form-group">
+                    <label>Город:</label>
+                    <input type="text" id="city" placeholder="Ваш город">
+                </div>
+                <button type="submit" class="btn-primary">Сохранить</button>
+            </form>
+        </div>
+    </template>
+
+    <template id="data-template">
+        <div class="data-section">
+            <h2>Управление данными</h2>
+            
+            <div class="add-item-form">
+                <h3>Добавить запись</h3>
+                <form id="add-item-form">
+                    <input type="text" id="itemTitle" placeholder="Название" required>
+                    <textarea id="itemDescription" placeholder="Описание"></textarea>
+                    <button type="submit" class="btn-primary">Добавить</button>
+                </form>
+            </div>
+            
+            <div class="items-list">
+                <h3>Список записей</h3>
+                <div id="items-container">
+                    <p>Загрузка...</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="auth-template">
+        <div class="auth-section">
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Вход</button>
+                <button class="tab-btn" data-tab="register">Регистрация</button>
+            </div>
+            
+            <div class="auth-forms">
+                <form id="login-form" class="auth-form active">
+                    <h3>Вход в аккаунт</h3>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль:</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Войти</button>
+                    <div id="login-error" class="error-message"></div>
+                </form>
+                
+                <form id="register-form" class="auth-form">
+                    <h3>Регистрация</h3>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль:</label>
+                        <input type="password" id="register-password" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn-primary">Зарегистрироваться</button>
+                    <div id="register-error" class="error-message"></div>
+                </form>
+            </div>
+        </div>
+    </template>
+
+    <template id="auth-status-template">
+        <div class="auth-status-section">
+            <h2>Вы вошли как:</h2>
+            <div id="user-info">
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+                <p><strong>ID:</strong> <span id="user-id"></span></p>
+            </div>
+            <button id="logout-btn" class="btn-danger">Выйти</button>
+        </div>
+    </template>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
